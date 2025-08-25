@@ -9,31 +9,40 @@ and returns them in a clean data structure we can reuse later.
 
 import chess.pgn
 from pathlib import Path
+import pandas as pd
 
 def parse_pgn(pgn_path: str, max_games: int = 5):
-    pgn_file = Path(pgn_path)
-    if not pgn_file.exists():
-        raise FileNotFoundError(f"PGN file not found at {pgn_path}")
-    
-    with open(pgn_file, encoding="utf-8") as pgn:
-        for i in range(max_games):
-            game = chess.pgn.read_game(pgn) 
-            if game is None:
-                print("No more games found")
-                break
-            # extract metadata
+    games = []
+    pgn = open(pgn_path)
+    for i in range(max_games):
+        game = chess.pgn.read_game(pgn)
+        if game is None:
+            break
 
-            headers = game.headers
-            print(f"\nGame {i+1}:")
-            print(f"Event   : {headers.get('Event', 'Unknown')}")
-            print(f"Site    : {headers.get('Site', 'Unknown')}")
-            print(f"Date    : {headers.get('Date', 'Unknown')}")
-            print(f"White   : {headers.get('White', 'Unknown')} ({headers.get('WhiteElo', '?')})")
-            print(f"Black   : {headers.get('Black', 'Unknown')} ({headers.get('BlackElo', '?')})")
-            print(f"Result  : {headers.get('Result', 'Unknown')}")
-            print(f"Opening : {headers.get('Opening', 'Unknown')}")
+        headers = game.headers
+        moves = " ".join([move.uci() for move in game.mainline_moves()])
+        game_dict = {
+            "Event": headers.get("Event","Unknown"),
+            "Site": headers.get("Site","Unknown"),
+            "Date": headers.get("Date", "Unknown"),
+            "White": headers.get("White", "Unknown"),
+            "Black": headers.get("Black","Unknown"),
+            "Result": headers.get("Result","Unknown"),
+            "ECO": headers.get("ECO", "Unknown"),
+            "WhiteElo" : headers.get("WhiteElo", "Unknown"),
+            "BlackElo" : headers.get("BlackElo", "Unknown"),
+            "Moves": moves
+                    }
+        
+        games.append(game_dict)
+
+    return pd.DataFrame(games)
+
+
+
 
 
 if __name__ == "__main__":
-    pgn_path = "knightVision/data/raw/lichess_db_standard_rated_2017-02.pgn"
-    parse_pgn(pgn_path, max_games=5)
+    pgn_path = "/Users/omanand/knightVision/data/raw/lichess_db_standard_rated_2017-02.pgn"
+
+    parse_pgn(pgn_path, max_games=5000)
