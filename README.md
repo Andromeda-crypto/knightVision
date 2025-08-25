@@ -1,6 +1,6 @@
 # knightVision
 
-
+KnightVision — Explore chess at scale with data-driven insights and move analysis.
 
 **KnightVision** is a Python project designed to analyze chess games at scale, transforming raw PGN data into structured insights. As a chess enthusiast, I wanted to build a project that combines my passion for the game with data-driven analysis.  
 
