@@ -46,3 +46,4 @@ if __name__ == "__main__":
     pgn_path = "/Users/omanand/knightVision/data/raw/lichess_db_standard_rated_2017-02.pgn"
 
     parse_pgn(pgn_path, max_games=5000)
+
