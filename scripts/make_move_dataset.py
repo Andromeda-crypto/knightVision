@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-STOCKFISH_PATH = "/users/omanand/knightVision/engines/stockfish/stockfish-macos-m1-apple-silicon"
-PGN_PATH = "data/raw/lichess_db_standard_rated_2017-02.pgn"
-OUT_PATH = "data/processed/moves_sample.parquet"
+STOCKFISH_PATH = "/Users/omanand/knightvision/engines/stockfish/stockfish-macos-m1-apple-silicon"
+PGN_PATH = "/Users/omanand/knightVision/data/raw/lichess_db_standard_rated_2017-02.pgn"
+OUT_PATH = "/Users/omanand/knightVision/data/processed/moves_sample.parquet"
 MULTIPV = 4
 N_GAMES = 50  # small sample for prototype
 NODES = 100000

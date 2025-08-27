@@ -2,13 +2,13 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-GAMES_CSV = "data/processed/games_5000.csv"
-OUT_PATH = "data/processed/practicality_table.parquet"
+GAMES_CSV = "/Users/omanand/knightVision/data/processed/games_5000.csv"
+OUT_PATH = "/Users/omanand/knightVision/data/processed/practicality_table.parquet"
 
 
 def short_sequence(moves_str, ply = 6):
     if not isinstance(moves_str, str): return ""
-    return " ".join(moves_str.spplit()[:ply])
+    return " ".join(moves_str.split()[:ply])
 
 def elo_bin(mean_elo):
     if pd.isna(mean_elo) : return "Unknown"
