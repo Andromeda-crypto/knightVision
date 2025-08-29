@@ -42,7 +42,7 @@ print(top_variations)
 # Error profiling with Stockfish
 
 
-# Path to Stockfish binary (adjust if needed)
+# Path to Stockfish
 STOCKFISH_PATH = "/Users/omanand/knightvision/engines/stockfish/stockfish-macos-m1-apple-silicon"
 
 def classify_error(prev_eval, new_eval, turn):
